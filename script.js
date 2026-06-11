@@ -368,7 +368,13 @@ function selectGame(gameId) {
     tile.className = "package-tile";
     tile.id = `pkg-${pkg.id}`;
     tile.onclick = () => selectPackage(pkg.id);
+    
+    // Add discount label if price >= 100,000 Kip
+    const hasDiscount = pkg.price >= 100000;
+    const discountBadge = hasDiscount ? `<span class="discount-tag">ຫຼຸດ 10%</span>` : '';
+
     tile.innerHTML = `
+      ${discountBadge}
       <div class="package-icon"><i class="fa-solid fa-gamepad"></i></div>
       <div class="package-name">${pkg.name}</div>
       <div class="package-price">${pkg.price.toLocaleString()} ກີບ</div>
@@ -390,6 +396,8 @@ function selectGame(gameId) {
   document.getElementById("summary-package").innerText = "-";
   document.getElementById("summary-payment").innerText = "-";
   document.getElementById("summary-price").innerText = "0 ກີບ";
+  const discountRow = document.getElementById("summary-discount-row");
+  if (discountRow) discountRow.style.display = "none";
 
   validateFormState();
 }
@@ -405,9 +413,27 @@ function selectPackage(pkgId) {
   document.querySelectorAll(".package-tile").forEach(t => t.classList.remove("active"));
   document.getElementById(`pkg-${pkgId}`).classList.add("active");
 
+  // Calculate discount: 10% if price >= 100,000 Kip
+  const originalPrice = pkg.price;
+  let discount = 0;
+  if (originalPrice >= 100000) {
+    discount = Math.round(originalPrice * 0.10);
+  }
+  const finalPrice = originalPrice - discount;
+
   // Update Summary Sidepanel
   document.getElementById("summary-package").innerText = pkg.name;
-  document.getElementById("summary-price").innerText = pkg.price.toLocaleString() + " ກີບ";
+  
+  const discountRow = document.getElementById("summary-discount-row");
+  const discountVal = document.getElementById("summary-discount");
+  if (discount > 0) {
+    if (discountVal) discountVal.innerText = "-" + discount.toLocaleString() + " ກີບ";
+    if (discountRow) discountRow.style.display = "flex";
+  } else {
+    if (discountRow) discountRow.style.display = "none";
+  }
+
+  document.getElementById("summary-price").innerText = finalPrice.toLocaleString() + " ກີບ";
 
   // Auto-select the only payment method: BCELOne
   selectPayment("bcel");
@@ -486,6 +512,14 @@ function executeTopup() {
     return;
   }
 
+  // Calculate discount: 10% if price >= 100,000 Kip
+  const originalPrice = selectedPackage.price;
+  let discount = 0;
+  if (originalPrice >= 100000) {
+    discount = Math.round(originalPrice * 0.10);
+  }
+  const finalPrice = originalPrice - discount;
+
   // Create order data
   const orderId = 'TXN-' + Math.floor(100000 + Math.random() * 900000);
   const dateStr = new Date().toLocaleString('lo-LA', { 
@@ -504,7 +538,9 @@ function executeTopup() {
     playerId: idValue,
     server: selectedGame.hasServer ? serverSelectVal : null,
     packageName: selectedPackage.name,
-    price: selectedPackage.price,
+    originalPrice: originalPrice,
+    discount: discount,
+    price: finalPrice,
     paymentMethod: selectedPayment,
     phone: phoneValue,
     date: dateStr,
@@ -523,7 +559,9 @@ function executeTopup() {
     playerId: idValue,
     server: orderData.server,
     packageName: selectedPackage.name,
-    price: selectedPackage.price,
+    originalPrice: originalPrice,
+    discount: discount,
+    price: finalPrice,
     paymentMethod: selectedPayment,
     status: 'SUCCESS'
   });
@@ -575,6 +613,7 @@ function renderKeysHistory() {
               </span>
             </div>
             <div style="text-align: right;">
+              ${order.discount && order.discount > 0 ? `<div style="font-size: 0.75rem; color: #f43f5e; text-decoration: line-through; margin-bottom: 2px;">${(order.originalPrice || (order.price + order.discount)).toLocaleString()} ກີບ</div>` : ''}
               <div style="color: #10b981; font-weight: 700;">${order.price.toLocaleString()} ກີບ</div>
               <div style="font-size: 0.75rem; color: #64748b;">${payName}</div>
             </div>

@@ -35,6 +35,14 @@
         <span class="row-label">ລາຍລະອຽດແພັກເກດ:</span>
         <span class="row-value cyan" id="disp-package-name">-</span>
       </div>
+      <div class="receipt-row" id="receipt-original-price-row" style="display: none;">
+        <span class="row-label">ລາຄາປົກກະຕິ:</span>
+        <span class="row-value" id="disp-original-price">0 ກີບ</span>
+      </div>
+      <div class="receipt-row" id="receipt-discount-row" style="display: none;">
+        <span class="row-label">ສ່ວນຫຼຸດ (10%):</span>
+        <span class="row-value" id="disp-discount" style="color: #f43f5e; font-weight: 700;">0 ກີບ</span>
+      </div>
       <div class="receipt-row">
         <span class="row-label">ຊ່ອງທາງການຈ່າຍ:</span>
         <span class="row-value" id="disp-payment-method">-</span>
@@ -96,6 +104,16 @@
       document.getElementById('disp-total-price').innerText = orderData.price.toLocaleString() + " ກີບ";
       document.getElementById('qr-total-text').innerText = orderData.price.toLocaleString() + " ກີບ";
       document.getElementById('barcode-id').innerText = orderData.orderId;
+
+      if (orderData.discount && orderData.discount > 0) {
+        document.getElementById('receipt-original-price-row').style.display = 'flex';
+        document.getElementById('receipt-discount-row').style.display = 'flex';
+        document.getElementById('disp-original-price').innerText = orderData.originalPrice.toLocaleString() + " ກີບ";
+        document.getElementById('disp-discount').innerText = "-" + orderData.discount.toLocaleString() + " ກີບ";
+      } else {
+        document.getElementById('receipt-original-price-row').style.display = 'none';
+        document.getElementById('receipt-discount-row').style.display = 'none';
+      }
 
       let payName = "BCELOne QR Pay";
       let badgeText = "BCEL One";
