@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AOY TOPUP - ຕິດຕໍ່ພວກເຮົາ | Contact Us</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="contact-page-body">
+  <div class="app-shell">
+    <header>
+      <div class="brand" onclick="location.href='index.html'">
+        <div class="brand-mark">
+          <img src="images/aoy_topup_logo.png" alt="Aoy Topup Logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+        </div>
+        <div>
+          <h1><span class="brand-glow-accent">AOY</span> <span class="brand-glow">TOPUP</span></h1>
+          <p>Gaming Top-up Hub</p>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> ໜ້າຫຼັກ</a>
+        <a href="topup.html" class="nav-link"><i class="fa-solid fa-gamepad"></i> ເຕີມເກມ</a>
+        <a href="contact.html" class="nav-link active"><i class="fa-solid fa-envelope"></i> ຕິດຕໍ່ເຮົາ</a>
+      </nav>
+
+      <div class="status-panel">
+        <button class="key-history-btn" id="key-history-btn" onclick="location.href='topup.html?openHistory=true'">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <span>ປະຫວັດການເຕີມ</span>
+        </button>
+        <div class="status-chip">
+          <span>ONLINE</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Title Header -->
+    <div class="page-title-banner">
+      <h1><i class="fa-solid fa-headset text-cyan"></i> ຕິດຕໍ່ພວກເຮົາ</h1>
+      <p>ມີບັນຫາການເຕີມເງິນ ຫຼື ຕ້ອງການສອບຖາມຂໍ້ມູນເພີ່ມເຕີມ? ພວກເຮົາພ້ອມຊ່ວຍເຫຼືອ 24 ຊົ່ວໂມງ.</p>
+    </div>
+
+    <!-- Main Container -->
+    <main class="contact-container">
+      <!-- Left Side: Channels -->
+      <section class="contact-channels">
+        <h2 class="contact-sec-title">ຊ່ອງທາງການຕິດຕໍ່ໂດຍກົງ</h2>
+        <p class="contact-sec-subtitle">ຄລິກເພື່ອຕິດຕໍ່ຫາແອດມິນໄດ້ໂດຍກົງຜ່ານແອັບພລິເຄຊັ່ນ</p>
+        
+        <div class="channels-grid">
+          <a href="https://wa.me/8562052862004" target="_blank" class="channel-card whatsapp-channel">
+            <div class="channel-icon-box"><i class="fa-brands fa-whatsapp"></i></div>
+            <div class="channel-details">
+              <h3>WhatsApp Support</h3>
+              <p>+856 20 52 86 2004</p>
+              <span class="channel-action">ສົ່ງຂໍ້ຄວາມເລີຍ <i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+            <div class="channel-badge green">ONLINE</div>
+          </a>
+
+          <a href="https://t.me/aoytopup" target="_blank" class="channel-card telegram-channel">
+            <div class="channel-icon-box"><i class="fa-brands fa-telegram"></i></div>
+            <div class="channel-details">
+              <h3>Telegram Channel</h3>
+              <p>@aoytopup</p>
+              <span class="channel-action">ເຂົ້າຮ່ວມກຸ່ມ <i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+          </a>
+
+          <a href="https://facebook.com/aoytopup" target="_blank" class="channel-card facebook-channel">
+            <div class="channel-icon-box"><i class="fa-brands fa-facebook"></i></div>
+            <div class="channel-details">
+              <h3>Facebook Page</h3>
+              <p>AOY TOPUP ເຕີມເກມ 24 ຊົ່ວໂມງ</p>
+              <span class="channel-action">ກົດຕິດຕາມເພຈ <i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+          </a>
+
+          <div class="channel-card info-channel">
+            <div class="channel-icon-box"><i class="fa-solid fa-clock"></i></div>
+            <div class="channel-details">
+              <h3>ເວລາໃຫ້ບໍລິການ</h3>
+              <p>ເຕີມອັດຕະໂນມັດ: 24/7</p>
+              <p>ແອດມິນຊັບພອດ: 08:00 - 23:00 ທຸກວັນ</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Side: Contact Form -->
+      <section class="contact-form-section">
+        <h2 class="contact-sec-title">ຝາກຂໍ້ຄວາມເຖິງເຮົາ</h2>
+        <p class="contact-sec-subtitle">ກະລຸນາປ້ອນຂໍ້ມູນດ້ານລຸ່ມ ທີມງານຈະຕິດຕໍ່ກັບຫາທ່ານໂດຍໄວ</p>
+
+        <form id="contact-form" class="contact-form" onsubmit="submitContactForm(event)">
+          <div class="form-group">
+            <label for="contact-name"><i class="fa-solid fa-user"></i> ຊື່ຂອງທ່ານ</label>
+            <input type="text" id="contact-name" placeholder="ຕົວຢ່າງ: ສົມພອນ ໄຊຍະວົງ" required>
+          </div>
+
+          <div class="form-group">
+            <label for="contact-method"><i class="fa-solid fa-phone"></i> WhatsApp / ເບີໂທຕິດຕໍ່</label>
+            <input type="text" id="contact-method" placeholder="ຕົວຢ່າງ: 20 9XXXXXXX" required>
+          </div>
+
+          <div class="form-group">
+            <label for="contact-subject"><i class="fa-solid fa-circle-info"></i> ຫົວຂໍ້ຕິດຕໍ່</label>
+            <select id="contact-subject" required>
+              <option value="" disabled selected>ກະລຸນາເລືອກຫົວຂໍ້</option>
+              <option value="topup_problem">ພົບປັນຫາການເຕີມເກມ</option>
+              <option value="payment_problem">ປັນຫາການໂອນເງິນ / ແຈ້ງຊຳລະ</option>
+              <option value="partnership">ຮ່ວມທຸລະກິດ / ພັນທະມິດ</option>
+              <option value="other">ອື່ນໆ</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="contact-message"><i class="fa-solid fa-comment-dots"></i> ຂໍ້ຄວາມລາຍລະອຽດ</label>
+            <textarea id="contact-message" rows="5" placeholder="ປ້ອນລາຍລະອຽດຂໍ້ຄວາມ ຫຼື ປັນຫາທີ່ທ່ານພົບ..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn-confirm" id="btn-submit-contact">
+            <i class="fa-solid fa-paper-plane"></i> ສົ່ງຂໍ້ຄວາມຫາເຮົາ
+          </button>
+        </form>
+
+        <!-- Form Success State -->
+        <div id="contact-success-box" class="contact-success-box" style="display: none;">
+          <div class="success-icon-container">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+          <h2>ສົ່ງຂໍ້ຄວາມສຳເລັດ!</h2>
+          <p>ລະບົບໄດ້ຮັບຂໍ້ຄວາມຂອງທ່ານແລ້ວ. ທີມງານ AOY TOPUP ຈະຕິດຕໍ່ກັບຫາທ່ານຜ່ານເບີຕິດຕໍ່ ຫຼື WhatsApp ໂດຍໄວທີ່ສຸດ.</p>
+          <button class="btn-confirm mt-3" onclick="resetContactForm()">
+            <i class="fa-solid fa-arrows-rotate"></i> ສົ່ງຂໍ້ຄວາມໃໝ່
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="brand-mark-small">⚡</div>
+          <h3>AOY TOPUP</h3>
+        </div>
+        <p>ບໍລິການເຕີມເກມອັດຕະໂນມັດ ວ່ອງໄວ ປອດໄພ ເຊື່ອຖືໄດ້ 24/7</p>
+        <div class="footer-links">
+          <a href="index.html">ໜ້າຫຼັກ</a>
+          <a href="topup.html">ເຕີມເກມ</a>
+          <a href="contact.html">ຕິດຕໍ່ເຮົາ</a>
+        </div>
+        <p class="copyright">© 2026 AOY TOPUP. All Rights Reserved. Designed for Gamers in Laos.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    function submitContactForm(event) {
+      event.preventDefault();
+      
+      const name = document.getElementById("contact-name").value.trim();
+      const method = document.getElementById("contact-method").value.trim();
+      const subject = document.getElementById("contact-subject").value;
+      const message = document.getElementById("contact-message").value.trim();
+
+      if (!name || !method || !subject || !message) {
+        alert("ກະລຸນາປ້ອນຂໍ້ມູນໃຫ້ຄົບຖ້ວນ!");
+        return;
+      }
+
+      // Hide form, show success message
+      document.getElementById("contact-form").style.display = "none";
+      document.getElementById("contact-success-box").style.display = "flex";
+    }
+
+    function resetContactForm() {
+      // Clear inputs
+      document.getElementById("contact-name").value = "";
+      document.getElementById("contact-method").value = "";
+      document.getElementById("contact-subject").value = "";
+      document.getElementById("contact-message").value = "";
+
+      // Show form, hide success message
+      document.getElementById("contact-form").style.display = "flex";
+      document.getElementById("contact-success-box").style.display = "none";
+    }
+  </script>
+</body>
+</html>

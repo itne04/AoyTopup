@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="lo">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AOY TOPUP - ບໍລິການເຕີມເກມ 24 ຊົ່ວໂມງ | ໜ້າຫຼັກ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="home-page">
+  <div class="app-shell">
+    <header>
+      <div class="brand" onclick="location.href='index.html'">
+        <div class="brand-mark">
+          <img src="images/aoy_topup_logo.png" alt="Aoy Topup Logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+        </div>
+        <div>
+          <h1><span class="brand-glow-accent">AOY</span> <span class="brand-glow">TOPUP</span></h1>
+          <p>Gaming Top-up Hub</p>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link active"><i class="fa-solid fa-house"></i> ໜ້າຫຼັກ</a>
+        <a href="topup.html" class="nav-link"><i class="fa-solid fa-gamepad"></i> ເຕີມເກມ</a>
+        <a href="contact.html" class="nav-link"><i class="fa-solid fa-envelope"></i> ຕິດຕໍ່ເຮົາ</a>
+      </nav>
+
+      <div class="status-panel">
+        <button class="key-history-btn" id="key-history-btn" onclick="location.href='topup.html?openHistory=true'">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <span>ປະຫວັດການເຕີມ</span>
+        </button>
+        <div class="status-chip">
+          <span>ONLINE</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-badge">⚡ ລະບົບເຕີມເກມອັດຕະໂມັດ 24 ຊົ່ວໂມງ</div>
+        <h1 class="hero-title typewriter-container">
+          <span class="typewriter-text">ເຕີມເກມສະດວກ <span class="gradient-text">ວ່ອງໄວ ທັນໃຈ</span></span>
+        </h1>
+        <p class="hero-subtitle">
+          ບໍລິການເຕີມເກມມືຖື ແລະ ຄອມພິວເຕີ ດ້ວຍລະບົບທີ່ທັນສະໄໝ ປອດໄພ 100% ແລະ ລາຄາຄຸ້ມຄ່າທີ່ສຸດໃນປະເທດລາວ.
+        </p>
+        <div class="hero-actions">
+          <a href="topup.html" class="btn-primary-hero"><i class="fa-solid fa-play-solid"></i> ເຕີມເກມເລີຍ <i
+              class="fa-solid fa-arrow-right"></i></a>
+          <a href="contact.html" class="btn-secondary-hero"><i class="fa-solid fa-phone"></i> ຕິດຕໍ່ສອບຖາມ</a>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Games Grid Heading -->
+    <section class="section-container">
+      <div class="section-header">
+        <h2 class="section-title"><i class="fa-solid fa-gamepad text-cyan"></i> ເລືອກເກມທີ່ຕ້ອງການເຕີມ</h2>
+        <p class="section-subtitle">ມີເກມໃຫ້ບໍລິການຫຼາກຫຼາຍເກມ ເຕີມງ່າຍໃນ 3 ຂັ້ນຕອນ</p>
+      </div>
+
+      <!-- Games list container dynamically loaded -->
+      <div class="game-grid" id="homepage-game-list">
+        <!-- Rendered dynamically from script.js -->
+      </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="section-container">
+      <div class="section-header">
+        <h2 class="section-title"><i class="fa-solid fa-circle-check text-indigo"></i> ເປັນຫຍັງຕ້ອງ AOY TOPUP</h2>
+        <p class="section-subtitle">ຈຸດເດັ່ນທີ່ເຮັດໃຫ້ລູກຄ້າໄວ້ວາງໃຈໃຊ້ບໍລິການກັບ AOY TOPUP</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon cyan-glow"><i class="fa-solid fa-bolt"></i></div>
+          <h3>ເຕີມໄວທັນໃຈ</h3>
+          <p>ລະບົບເຮັດວຽກອັດຕະໂນມັດ ຫຼັງຈາກການຢືນຢັນຊຳລະເງິນ ເຕີມເຂົ້າບັນຊີໄວໃນ 1-3 ນາທີ.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon indigo-glow"><i class="fa-solid fa-shield-halved"></i></div>
+          <h3>ປອດໄພ 100%</h3>
+          <p>ໃຊ້ຊ່ອງທາງການເຕີມເງິນທີ່ຖືກຕ້ອງຕາມລິຂະສິດ ປອດໄພຈາກການໂດນແບນໄອດີຢ່າງແນ່ນອນ.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon green-glow"><i class="fa-solid fa-tags"></i></div>
+          <h3>ລາຄາປະຢັດ</h3>
+          <p>ລາຄາຖືກກວ່າການເຕີມເງິນເອງໃນເກມ ແລະ ຍັງມີໂປຣໂມຊັ່ນຫຼຸດລາຄາພິເສດຕະຫຼອດທັງເດືອນ.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon amber-glow"><i class="fa-solid fa-headset"></i></div>
+          <h3>ບໍລິການ 24 ຊົ່ວໂມງ</h3>
+          <p>ລະບົບຮອງຮັບການເຮັດທຸລະກຳຕະຫຼອດ 24 ຊົ່ວໂມງ ພ້ອມທີມງານຊ່ວຍເຫຼືອ WhatsApp.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+      <div class="stat-item">
+        <div class="stat-value text-cyan">50,000+</div>
+        <div class="stat-label">ຜູ້ໃຊ້ງານທັງໝົດ</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value text-indigo">180,000+</div>
+        <div class="stat-label">ລາຍການເຕີມເງິນສຳເລັດ</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value text-green">99.9%</div>
+        <div class="stat-label">ຄວາມພຶງພໍໃຈຂອງລູກຄ້າ</div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section-container">
+      <div class="section-header">
+        <h2 class="section-title"><i class="fa-solid fa-comments text-amber"></i> ສຽງຕອບຮັບຈາກລູກຄ້າ</h2>
+        <p class="section-subtitle">ລີວິວສ່ວນໜຶ່ງຈາກຜູ້ໃຊ້ບໍລິການຈິງກັບເວັບໄຊຂອງພວກເຮົາ</p>
+      </div>
+
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-user">
+            <div class="user-avatar">🏆</div>
+            <div>
+              <h4>ທ່ານ ສົມພອນ</h4>
+              <span class="review-date">ເຕີມ Free Fire</span>
+            </div>
+          </div>
+          <p class="review-text">
+            "ເຕີມເພັດ Free Fire ໄວຫຼາຍ! ໂອນເງິນປຸບ ໄດ້ເພັດປັດ. ລະບົບສະແກນ QR ຂອງ BCELOne ສະດວກແທ້ໆ."
+          </p>
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-user">
+            <div class="user-avatar">🔥</div>
+            <div>
+              <h4>ນາງ ມະລິ</h4>
+              <span class="review-date">ເຕີມ RoV</span>
+            </div>
+          </div>
+          <p class="review-text">
+            "ລາຄາຖືກກວ່າຮ້ານອື່ນຫຼາຍ, ປອດໄພ ບໍ່ເຄີຍມີບັນຫາເລື່ອງໄອດີເລີຍ. ແນະນຳຮ້ານນີ້ຕະຫຼອດເລີຍ!"
+          </p>
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-user">
+            <div class="user-avatar">⚡</div>
+            <div>
+              <h4>ທ່ານ ອານຸສອນ</h4>
+              <span class="review-date">ເຕີມ Roblox</span>
+            </div>
+          </div>
+          <p class="review-text">
+            "ເຄີຍມີບັນຫາປ້ອນ UID ຜິດ ແຕ່ຕິດຕໍ່ແອດມິນຜ່ານ WhatsApp ແລ້ວແກ້ໄຂໃຫ້ໄວຫຼາຍ ບໍລິການດີເດັ່ນ!"
+          </p>
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="brand-mark-small">⚡</div>
+          <h3>AOY TOPUP</h3>
+        </div>
+        <p>ບໍລິການເຕີມເກມອັດຕະໂນມັດ ວ່ອງໄວ ປອດໄພ ເຊື່ອຖືໄດ້ 24/7</p>
+        <div class="footer-links">
+          <a href="index.html">ໜ້າຫຼັກ</a>
+          <a href="topup.html">ເຕີມເກມ</a>
+          <a href="contact.html">ຕິດຕໍ່ເຮົາ</a>
+        </div>
+        <p class="copyright">© 2026 AOY TOPUP. All Rights Reserved. Designed for Gamers in Laos.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

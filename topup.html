@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AOY TOPUP - ບໍລິການເຕີມເກມ 24 ຊົ່ວໂມງ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header>
+      <div class="brand" onclick="location.href='index.html'">
+        <div class="brand-mark">
+          <img src="images/aoy_topup_logo.png" alt="Aoy Topup Logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+        </div>
+        <div>
+          <h1><span class="brand-glow-accent">AOY</span> <span class="brand-glow">TOPUP</span></h1>
+          <p>Gaming Top-up Hub</p>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> ໜ້າຫຼັກ</a>
+        <a href="topup.html" class="nav-link active"><i class="fa-solid fa-gamepad"></i> ເຕີມເກມ</a>
+        <a href="contact.html" class="nav-link"><i class="fa-solid fa-envelope"></i> ຕິດຕໍ່ເຮົາ</a>
+      </nav>
+
+      <div class="status-panel">
+        <button class="key-history-btn" id="key-history-btn">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <span>ປະຫວັດການເຕີມ</span>
+        </button>
+        <div class="status-chip">
+          <span>ONLINE</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <!-- Left Flow Panel (Steps 1 to 4) -->
+      <div class="flow-panel">
+        <!-- STEP 1: Select Game -->
+        <section class="step-section" id="step-1-section">
+          <div class="step-header">
+            <div class="step-number">1</div>
+            <div>
+              <h2 class="step-title">ເລືອກເກມທີ່ຈະເຕີມ</h2>
+              <p class="step-subtitle">ກະລຸນາເລືອກເກມທີ່ທ່ານຕ້ອງການເຕີມເງິນ</p>
+            </div>
+          </div>
+          
+          <div class="game-grid" id="game-list">
+            <!-- Rendered dynamically from script.js -->
+          </div>
+        </section>
+
+        <!-- STEP 2: Player ID Information -->
+        <section class="step-section disabled" id="step-2-section">
+          <div class="step-header">
+            <div class="step-number">2</div>
+            <div>
+              <h2 class="step-title">ປ້ອນຂໍ້ມູນບັນຊີ</h2>
+              <p class="step-subtitle">ກະລุนາໃສ່ ID ຜູ້ຫຼິ້ນ ແລະ ເລືອກເຊີບເວີ (ຖ້າມີ)</p>
+            </div>
+          </div>
+          
+          <div class="step-content">
+            <div class="input-row">
+              <div class="form-group flex-2">
+                <label for="player-id-input"><i class="fa-solid fa-user-gear"></i> ID ຜູ້ຫຼິ້ນ (Player ID / UID)</label>
+                <input type="text" id="player-id-input" placeholder="ຕົວຢ່າງ: 123456789" disabled>
+              </div>
+              
+              <div class="form-group flex-1" id="server-group" style="display: none;">
+                <label for="server-select"><i class="fa-solid fa-server"></i> ເຊີບເວີ (Server)</label>
+                <select id="server-select" disabled>
+                  <!-- Populated dynamically based on game -->
+                </select>
+              </div>
+            </div>
+            <div class="helper-text" id="id-helper">ກະລຸນາເລືອກເກມກ່ອນເພື່ອລະບຸຮູບແບບ ID</div>
+          </div>
+        </section>
+
+        <!-- STEP 3: Select Package -->
+        <section class="step-section disabled" id="step-3-section">
+          <div class="step-header">
+            <div class="step-number">3</div>
+            <div>
+              <h2 class="step-title">ເລືອກແພັກເກດ</h2>
+              <p class="step-subtitle">ເລືອກຈຳນວນເງິນ ຫຼື ໄອເທັມທີ່ຕ້ອງການເຕີມ</p>
+            </div>
+          </div>
+          
+          <div class="step-content">
+            <div class="packages-grid" id="package-list">
+              <div class="no-packages-msg">ກະລຸນາເລືອກເກມກ່ອນເພື່ອສະແດງແພັກເກດ</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- STEP 4: Select Payment Method -->
+        <section class="step-section disabled" id="step-4-section">
+          <div class="step-header">
+            <div class="step-number">4</div>
+            <div>
+              <h2 class="step-title">ເລືອກຊ່ອງທາງການຊຳລະເງິນ</h2>
+              <p class="step-subtitle">ຮອງຮັບທະນາຄານ ແລະ ກະເປົ໋າເງິນຍອດນິຍົມໃນລາວ</p>
+            </div>
+          </div>
+          
+          <div class="step-content">
+            <div class="payment-grid" id="payment-list">
+              <div class="payment-card" data-payment="bcel">
+                <div class="payment-card-logo bcel-logo">BCELOne</div>
+                <div class="payment-card-info">
+                  <span class="payment-name">BCELOne QR Pay</span>
+                  <span class="payment-desc">ສະແກນ QR ຈ່າຍຜ່ານແອັບທະນາຄານການຄ້າ</span>
+                </div>
+                <div class="payment-badge">ແນະນຳ</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Right Sidebar (Checkout Panel) -->
+      <aside class="checkout-panel">
+        <div class="panel-header">
+          <p class="panel-title"><i class="fa-solid fa-receipt"></i> ສະຫຼຸບການສັ່ງຊື້</p>
+          <span>ລາຍລະອຽດທຸລະກຳ</span>
+        </div>
+
+        <div class="checkout-summary-box">
+          <div class="summary-row">
+            <span class="summary-label">ເກມ:</span>
+            <span class="summary-value" id="summary-game">-</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">ID ຜູ້ຫຼິ້ນ:</span>
+            <span class="summary-value highlighted-id" id="summary-id">-</span>
+          </div>
+          <div class="summary-row" id="summary-server-row" style="display: none;">
+            <span class="summary-label">ເຊີບເວີ:</span>
+            <span class="summary-value" id="summary-server">-</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">ແພັກເກດ:</span>
+            <span class="summary-value" id="summary-package">-</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">ຊ່ອງທາງຈ່າຍ:</span>
+            <span class="summary-value" id="summary-payment">-</span>
+          </div>
+        </div>
+
+        <div class="form-group mt-3">
+          <label for="cust-phone-input"><i class="fa-solid fa-phone"></i> ເບີໂທຕິດຕໍ່ (WhatsApp)</label>
+          <input type="text" id="cust-phone-input" placeholder="ຕົວຢ່າງ: 20 9XXXXXXX" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+        </div>
+
+        <div class="price-box">
+          <span class="price-label">ລາຄາຕ້ອງຊຳລະ:</span>
+          <span class="price-value" id="summary-price">0 ກີບ</span>
+        </div>
+
+        <button class="btn-confirm disabled" id="btn-submit-topup" onclick="executeTopup()">
+          <i class="fa-solid fa-circle-check animate-pulse"></i> ຢືນຢັນການເຕີມເງິນ
+        </button>
+      </aside>
+    </main>
+  </div>
+
+  <!-- Modal for Purchased History -->
+  <div id="keys-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2><i class="fa-solid fa-clock-rotate-left"></i> ປະຫວັດການເຕີມເງິນຂອງທ່ານ</h2>
+        <span class="close-btn" id="close-modal">&times;</span>
+      </div>
+      <div class="modal-body" id="keys-history-list">
+        <!-- Rendered dynamically from localStorage -->
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
