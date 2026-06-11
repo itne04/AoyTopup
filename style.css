@@ -910,15 +910,15 @@ header {
 }
 
 .receipt-container {
-  width: min(100%, 550px);
+  width: min(100%, 460px);
   background: var(--bg-secondary);
   border: 1px solid var(--border-glow);
-  border-radius: 28px;
-  padding: 32px;
+  border-radius: 20px;
+  padding: 20px;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 14px;
 }
 
 .receipt-header {
@@ -926,37 +926,37 @@ header {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 12px;
+  gap: 6px;
 }
 
 .receipt-icon-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 68px;
-  height: 68px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   background: rgba(245, 158, 11, 0.1);
-  border: 2px solid rgba(245, 158, 11, 0.3);
-  box-shadow: 0 0 20px rgba(245, 158, 11, 0.15);
+  border: 1.5px solid rgba(245, 158, 11, 0.3);
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.1);
   animation: pulse-amber 2.2s infinite;
 }
 
 .receipt-icon-container.completed {
   background: rgba(16, 185, 129, 0.1);
   border-color: rgba(16, 185, 129, 0.3);
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.1);
   animation: none;
 }
 
 @keyframes pulse-amber {
   0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
-  70% { box-shadow: 0 0 0 12px rgba(245, 158, 11, 0); }
+  70% { box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); }
   100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
 }
 
 .receipt-icon {
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: var(--accent-amber);
 }
 
@@ -965,9 +965,9 @@ header {
 }
 
 .receipt-title-block h2 {
-  font-size: 1.45rem;
+  font-size: 1.25rem;
   color: var(--text-primary);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   font-weight: 700;
 }
 
@@ -975,10 +975,10 @@ header {
   background: rgba(245, 158, 11, 0.1);
   color: var(--accent-amber);
   border: 1px solid rgba(245, 158, 11, 0.2);
-  padding: 4px 14px;
+  padding: 3px 10px;
   border-radius: 999px;
   font-weight: 700;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   letter-spacing: 0.08em;
   display: inline-block;
   text-transform: uppercase;
@@ -994,35 +994,35 @@ header {
 .receipt-info-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: 8px;
 }
 
 .info-card {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   background: rgba(8, 14, 27, 0.6);
   border: 1px solid var(--border-color);
-  border-radius: 16px;
-  padding: 12px 14px;
+  border-radius: 12px;
+  padding: 8px 10px;
 }
 
 .info-card i {
-  font-size: 1rem;
+  font-size: 0.85rem;
   color: var(--accent-indigo);
 }
 
 .info-label {
   display: block;
-  font-size: 0.72rem;
+  font-size: 0.62rem;
   color: var(--text-muted);
   text-transform: uppercase;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
 }
 
 .info-value {
   display: block;
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   font-weight: 700;
   color: var(--text-primary);
 }
@@ -1031,15 +1031,15 @@ header {
 .receipt-details-card {
   background: rgba(8, 14, 27, 0.8);
   border: 1px solid var(--border-color);
-  border-radius: 20px;
-  padding: 20px;
+  border-radius: 14px;
+  padding: 14px;
 }
 
 .receipt-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 0;
+  padding: 8px 0;
   border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
 }
 
@@ -1053,12 +1053,12 @@ header {
 }
 
 .row-label {
-  font-size: 0.88rem;
+  font-size: 0.8rem;
   color: var(--text-secondary);
 }
 
 .row-value {
-  font-size: 0.92rem;
+  font-size: 0.85rem;
   font-weight: 700;
   color: var(--text-primary);
 }
@@ -1071,13 +1071,13 @@ header {
 .qr-payment-section {
   background: rgba(8, 14, 27, 0.95);
   border: 1px dashed var(--accent-amber);
-  border-radius: 20px;
-  padding: 24px;
+  border-radius: 16px;
+  padding: 16px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
 .qr-payment-section.completed {
@@ -1088,10 +1088,10 @@ header {
 .qr-title {
   color: var(--accent-amber);
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .completed .qr-title {
@@ -1099,16 +1099,16 @@ header {
 }
 
 .qr-desc {
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   color: var(--text-secondary);
-  line-height: 1.5;
-  max-width: 320px;
+  line-height: 1.4;
+  max-width: 280px;
 }
 
 .qr-wrapper {
   background: white;
-  padding: 14px;
-  border-radius: 16px;
+  padding: 10px;
+  border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
   position: relative;
   display: flex;
@@ -1120,42 +1120,42 @@ header {
   position: absolute;
   background: #0056b3;
   color: white;
-  font-size: 0.55rem;
+  font-size: 0.5rem;
   font-weight: 800;
-  padding: 2px 6px;
-  border-radius: 4px;
+  padding: 1px 4px;
+  border-radius: 3px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 2px solid white;
+  border: 1.5px solid white;
   box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
 
 /* Mock QR Code Lines using pure CSS */
 .bcel-qr-mock {
-  width: 140px;
-  height: 140px;
+  width: 110px;
+  height: 110px;
   background-image:
     linear-gradient(90deg, #111 25%, transparent 25%),
     linear-gradient(#111 25%, transparent 25%),
     linear-gradient(90deg, transparent 75%, #111 75%),
     linear-gradient(transparent 75%, #111 75%);
-  background-size: 20px 20px;
+  background-size: 15px 15px;
   position: relative;
 }
 
 .bcel-qr-mock::before {
   content: '';
   position: absolute;
-  inset: 16px;
+  inset: 12px;
   background-image: 
-    repeating-linear-gradient(45deg, #111, #111 4px, transparent 4px, transparent 8px),
-    repeating-linear-gradient(-45deg, #111, #111 2px, transparent 2px, transparent 6px);
+    repeating-linear-gradient(45deg, #111, #111 3px, transparent 3px, transparent 6px),
+    repeating-linear-gradient(-45deg, #111, #111 1.5px, transparent 1.5px, transparent 4.5px);
   opacity: 0.85;
 }
 
 .total-to-pay-qr {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 800;
   color: var(--accent-cyan);
 }
@@ -1164,9 +1164,9 @@ header {
   background: rgba(16, 185, 129, 0.1);
   border: 1px solid rgba(16, 185, 129, 0.25);
   color: var(--accent-green);
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-size: 0.8rem;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
   font-weight: 700;
   cursor: pointer;
   transition: var(--transition);
@@ -1182,13 +1182,13 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 8px;
-  gap: 8px;
+  margin-top: 0;
+  gap: 4px;
 }
 
 .barcode-lines {
-  width: 160px;
-  height: 32px;
+  width: 140px;
+  height: 20px;
   background: repeating-linear-gradient(
     90deg,
     var(--text-muted),
@@ -1200,12 +1200,12 @@ header {
     transparent 7px,
     transparent 9px
   );
-  opacity: 0.4;
+  opacity: 0.3;
 }
 
 .barcode-text {
   font-family: monospace;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   color: var(--text-muted);
   letter-spacing: 0.15em;
 }
@@ -1213,7 +1213,7 @@ header {
 .receipt-actions {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: 8px;
 }
 
 .btn-wide {
@@ -1221,16 +1221,16 @@ header {
 }
 
 .receipt-actions .btn {
-  padding: 12px 14px;
-  border-radius: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
   font-weight: 700;
-  font-size: 0.88rem;
+  font-size: 0.8rem;
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   transition: var(--transition);
 }
 
