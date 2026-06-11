@@ -460,6 +460,41 @@ header {
   box-shadow: 0 4px 10px rgba(244, 63, 94, 0.3);
   letter-spacing: 0.03em;
   pointer-events: none;
+  overflow: hidden;
+  animation: badgePulse 2s infinite ease-in-out;
+}
+
+.discount-tag::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 30%;
+  height: 200%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
+  transform: rotate(30deg);
+  animation: shimmerSweep 3s infinite ease-in-out;
+}
+
+@keyframes shimmerSweep {
+  0% {
+    left: -60%;
+  }
+  35%, 100% {
+    left: 140%;
+  }
+}
+
+@keyframes badgePulse {
+  0% {
+    box-shadow: 0 0 6px rgba(244, 63, 94, 0.4), 0 2px 5px rgba(244, 63, 94, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(244, 63, 94, 0.95), 0 4px 10px rgba(244, 63, 94, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 6px rgba(244, 63, 94, 0.4), 0 2px 5px rgba(244, 63, 94, 0.2);
+  }
 }
 
 .no-packages-msg {
