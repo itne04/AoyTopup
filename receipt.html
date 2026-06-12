@@ -67,11 +67,14 @@
         <div class="bcel-qr-badge" id="qr-badge">BCEL One</div>
       </div>
 
-      <div class="total-to-pay-qr" id="qr-total-text">0 ກีບ</div>
+      <div class="total-to-pay-qr" id="qr-total-text">0 ກີບ</div>
       
       <button class="simulate-payment-btn" id="btn-simulate" onclick="simulatePayment()">
         <i class="fa-solid fa-circle-check"></i> ຂ້ອຍໂອນເງິນແລ້ວ (ຈຳລອງການຈ່າຍ)
       </button>
+
+      <!-- Review Area placeholder -->
+      <div id="review-area" style="width: 100%;"></div>
     </div>
 
     <!-- Decorative Barcode -->
@@ -91,6 +94,60 @@
       <button class="btn btn-back btn-wide" onclick="location.href='index.html'">
         <i class="fa-solid fa-arrow-left"></i> ກັບຄືນໜ້າຫຼັກ
       </button>
+    </div>
+  </div>
+
+  <!-- Modal for Writing a Review -->
+  <div id="review-modal" class="modal">
+    <div class="modal-content" style="max-width: 450px;">
+      <div class="modal-header">
+        <h2><i class="fa-solid fa-pen-to-square"></i> ຂຽນຣີວິວການບໍລິການ</h2>
+        <span class="close-btn" onclick="closeReviewModal()">&times;</span>
+      </div>
+      <div class="modal-body" style="gap: 16px;">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+          <span style="color: var(--text-secondary); font-size: 0.9rem;">ຄະແນນຄວາມພຶງພໍໃຈ:</span>
+          <div class="star-rating" style="display: flex; gap: 8px; font-size: 2rem; cursor: pointer;">
+            <i class="fa-solid fa-star star-btn" data-value="1" style="color: #334155; transition: color 0.2s;"></i>
+            <i class="fa-solid fa-star star-btn" data-value="2" style="color: #334155; transition: color 0.2s;"></i>
+            <i class="fa-solid fa-star star-btn" data-value="3" style="color: #334155; transition: color 0.2s;"></i>
+            <i class="fa-solid fa-star star-btn" data-value="4" style="color: #334155; transition: color 0.2s;"></i>
+            <i class="fa-solid fa-star star-btn" data-value="5" style="color: #334155; transition: color 0.2s;"></i>
+          </div>
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <label style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 700;">ຊື່ຜູ້ຣີວິວ:</label>
+          <input type="text" id="review-username" placeholder="ໃສ່ຊື່ຂອງທ່ານ..." class="review-input">
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <label style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 700;">ເກມທີ່ເຕີມ:</label>
+          <input type="text" id="review-gamename" readonly class="review-input" style="opacity: 0.6; cursor: not-allowed;">
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <label style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 700;">ຂໍ້ຄວາມຣີວິວ:</label>
+          <textarea id="review-comment" rows="3" placeholder="ແບ່ງປັນຄວາມປະທັບໃຈຂອງທ່ານ..." class="review-textarea"></textarea>
+        </div>
+
+        <button onclick="submitReview()" style="background: linear-gradient(135deg, var(--accent-indigo), var(--accent-cyan)); color: white; border: none; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 8px; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);">
+          <i class="fa-solid fa-paper-plane"></i> ສົ່ງຣີວິວ
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Viewing All Reviews -->
+  <div id="all-reviews-modal" class="modal">
+    <div class="modal-content" style="max-width: 500px; max-height: 85vh;">
+      <div class="modal-header">
+        <h2><i class="fa-solid fa-comments"></i> ຣີວິວທັງໝົດຈາກລູກຄ້າ</h2>
+        <span class="close-btn" onclick="closeAllReviewsModal()">&times;</span>
+      </div>
+      <div class="modal-body" id="all-reviews-list" style="gap: 12px; max-height: calc(85vh - 75px); overflow-y: auto;">
+        <!-- Rendered dynamically -->
+      </div>
     </div>
   </div>
 
@@ -167,6 +224,11 @@
           </div>
         </div>
       `;
+
+      // Check if order is already paid/completed and display success view
+      if (orderData.status === 'SUCCESS') {
+        showSuccessUI();
+      }
     } else {
       document.querySelector('.receipt-container').innerHTML = `
         <div style="text-align: center; padding: 40px 20px;">
@@ -174,37 +236,52 @@
           <h2>ບໍ່ພົບຂໍ້ມູນການເຕີມເງິນ</h2>
           <p style="color: #94a3b8; margin: 12px 0 24px;">ກະລຸນາກັບຄືນໄປເຮັດລາຍການຢູ່ໜ້າຫຼັກ</p>
           <button class="btn btn-back" onclick="location.href='index.html'" style="margin: 0 auto; width: 200px;">
-            <i class="fa-solid fa-arrow-left"></i> ກັບຄືนໜ້າຫຼັກ
+            <i class="fa-solid fa-arrow-left"></i> ກັບຄືນໜ້າຫຼັກ
           </button>
         </div>
       `;
     }
 
-    function simulatePayment() {
+    function showSuccessUI() {
       // 1. Change layout to COMPLETED
       const statusIconContainer = document.getElementById('status-icon-container');
-      statusIconContainer.classList.add('completed');
+      if (statusIconContainer) statusIconContainer.classList.add('completed');
       
       const statusIcon = document.getElementById('status-icon');
-      statusIcon.className = "fa-solid fa-circle-check receipt-icon"; // remove fa-spin and change icon
+      if (statusIcon) statusIcon.className = "fa-solid fa-circle-check receipt-icon"; // remove fa-spin and change icon
 
       const statusChip = document.getElementById('status-chip');
-      statusChip.innerText = "SUCCESS";
-      statusChip.classList.add('completed');
+      if (statusChip) {
+        statusChip.innerText = "SUCCESS";
+        statusChip.classList.add('completed');
+      }
 
       // 2. Change QR section to Success status
       const qrSection = document.getElementById('qr-section');
-      qrSection.classList.add('completed');
+      if (qrSection) qrSection.classList.add('completed');
       
-      document.getElementById('qr-section-title').innerHTML = `<i class="fa-solid fa-circle-check" style="color: #10b981;"></i> ຊຳລະເງິນສຳເລັດແລ້ວ`;
-      document.getElementById('qr-section-desc').innerHTML = `ລະບົບໄດ້ຮັບເງິນຂອງທ່ານແລ້ວ! ແລະ ກຳລັງດຳເນີນການເຕີມ <strong>${orderData.packageName}</strong> ເຂົ້າບັນຊີ ID <strong>${orderData.playerId}</strong>.`;
+      const title = document.getElementById('qr-section-title');
+      if (title) title.innerHTML = `<i class="fa-solid fa-circle-check" style="color: #10b981;"></i> ຊຳລະເງິນສຳເລັດແລ້ວ`;
+      
+      const desc = document.getElementById('qr-section-desc');
+      if (desc) desc.innerHTML = `ລະບົບໄດ້ຮັບເງິນຂອງທ່ານແລ້ວ! ແລະ ກຳລັງດຳເນີນການເຕີມ <strong>${orderData.packageName}</strong> ເຂົ້າບັນຊີ ID <strong>${orderData.playerId}</strong>.`;
       
       // Hide QR code wrapper & price & simulate button
-      document.querySelector('.qr-wrapper').style.display = "none";
-      document.getElementById('qr-total-text').style.display = "none";
-      document.getElementById('btn-simulate').style.display = "none";
+      const qrWrapper = document.querySelector('.qr-wrapper');
+      if (qrWrapper) qrWrapper.style.display = "none";
+      
+      const totalText = document.getElementById('qr-total-text');
+      if (totalText) totalText.style.display = "none";
+      
+      const btnSimulate = document.getElementById('btn-simulate');
+      if (btnSimulate) btnSimulate.style.display = "none";
 
-      // 3. Update localStorage history status
+      // 3. Show review buttons
+      showReviewButtons();
+    }
+
+    function simulatePayment() {
+      // 1. Update localStorage history status
       if (orderData) {
         let history = JSON.parse(localStorage.getItem('purchasedKeysHistory') || '[]');
         const idx = history.findIndex(h => h.orderId === orderData.orderId);
@@ -217,11 +294,222 @@
         orderData.status = 'SUCCESS';
         localStorage.setItem('myOrder', JSON.stringify(orderData));
       }
+      showSuccessUI();
     }
 
     function saveAsPDF() {
       window.print();
     }
+
+    // --- Reviews Logic ---
+    let selectedRating = 5;
+
+    function showReviewButtons() {
+      const reviewArea = document.getElementById('review-area');
+      if (reviewArea) {
+        reviewArea.innerHTML = `
+          <div class="review-actions-container" style="display: flex; gap: 10px; width: 100%; margin-top: 15px;">
+            <button class="btn btn-review" onclick="openReviewModal()" style="flex: 1; padding: 10px; border-radius: 10px; font-weight: 700; font-size: 0.8rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: transform 0.2s, box-shadow 0.2s;">
+              <i class="fa-solid fa-star" style="color: #fbbf24;"></i> ຂຽນຣີວິວ
+            </button>
+            <button class="btn btn-view-reviews" onclick="openAllReviewsModal()" style="flex: 1; padding: 10px; border-radius: 10px; font-weight: 700; font-size: 0.8rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: transform 0.2s, background-color 0.2s;">
+              <i class="fa-solid fa-comments" style="color: var(--accent-cyan);"></i> ເບິ່ງຣີວິວທັງໝົດ
+            </button>
+          </div>
+        `;
+      }
+    }
+
+    function openReviewModal() {
+      const modal = document.getElementById('review-modal');
+      if (modal) {
+        const gameInput = document.getElementById('review-gamename');
+        if (gameInput && orderData) {
+          gameInput.value = orderData.gameName;
+        }
+        document.getElementById('review-username').value = '';
+        document.getElementById('review-comment').value = '';
+        selectedRating = 5;
+        setupStarRating();
+        modal.classList.add('show');
+      }
+    }
+
+    function closeReviewModal() {
+      const modal = document.getElementById('review-modal');
+      if (modal) {
+        modal.classList.remove('show');
+      }
+    }
+
+    function openAllReviewsModal() {
+      renderAllReviews();
+      const modal = document.getElementById('all-reviews-modal');
+      if (modal) {
+        modal.classList.add('show');
+      }
+    }
+
+    function closeAllReviewsModal() {
+      const modal = document.getElementById('all-reviews-modal');
+      if (modal) {
+        modal.classList.remove('show');
+      }
+    }
+
+    function setupStarRating() {
+      const stars = document.querySelectorAll('.star-btn');
+      stars.forEach(star => {
+        star.onclick = () => {
+          selectedRating = parseInt(star.getAttribute('data-value'));
+          updateStarsUI();
+        };
+      });
+      updateStarsUI();
+    }
+
+    function updateStarsUI() {
+      const stars = document.querySelectorAll('.star-btn');
+      stars.forEach(star => {
+        const val = parseInt(star.getAttribute('data-value'));
+        if (val <= selectedRating) {
+          star.style.color = '#fbbf24';
+        } else {
+          star.style.color = '#334155';
+        }
+      });
+    }
+
+    const defaultReviews = [
+      {
+        id: "rev-1",
+        name: "Mr Kira",
+        avatar: "🏆",
+        game: "ເຕີມ Free Fire",
+        comment: "ເຕີມເພັດ Free Fire ໄວຫຼາຍ! ໂອນເງິນປຸບ ໄດ້ເພັດປັດ. ລະບົບສະແກນ QR ຂອງ BCELOne ສະດວກແທ້ໆ.",
+        rating: 5,
+        date: "12/06/2026"
+      },
+      {
+        id: "rev-2",
+        name: "ນາງ ມະລິ",
+        avatar: "🔥",
+        game: "ເຕີມ RoV",
+        comment: "ລາຄາຖືກກວ່າຮ້ານອື່ນຫຼາຍ, ປອດໄພ ບໍ່ເຄີຍມີບັນຫາເລື່ອງໄອດີເລີຍ. ແນະນຳຮ້ານນີ້ຕະຫຼອດເລີຍ!",
+        rating: 5,
+        date: "11/06/2026"
+      },
+      {
+        id: "rev-3",
+        name: "Kaniki",
+        avatar: "⚡",
+        game: "ເຕີມ Roblox",
+        comment: "ເຄີຍມີບັນຫາປ້ອນ UID ຜິດ ແຕ່ຕິດຕໍ່ແອດມິນຜ່ານ WhatsApp ແລ້ວແກ້ໄຂໃຫ້ໄວຫຼາຍ ບໍລິການດີເດັ່ນ!",
+        rating: 5,
+        date: "10/06/2026"
+      }
+    ];
+
+    function getReviews() {
+      const stored = localStorage.getItem('aoy_topup_reviews');
+      if (!stored) {
+        localStorage.setItem('aoy_topup_reviews', JSON.stringify(defaultReviews));
+        return defaultReviews;
+      }
+      return JSON.parse(stored);
+    }
+
+    function renderAllReviews() {
+      const container = document.getElementById('all-reviews-list');
+      if (!container) return;
+      
+      const reviews = getReviews();
+      const sortedReviews = [...reviews].reverse();
+      
+      let html = '';
+      sortedReviews.forEach(rev => {
+        let starsHtml = '';
+        for (let i = 0; i < 5; i++) {
+          starsHtml += i < rev.rating ? '<i class="fa-solid fa-star" style="color: #fbbf24; font-size: 0.75rem;"></i>' : '<i class="fa-regular fa-star" style="color: #475569; font-size: 0.75rem;"></i>';
+        }
+        
+        html += `
+          <div class="review-card" style="padding: 16px; background: rgba(8, 14, 27, 0.6); border: 1px solid var(--border-color); border-radius: 14px; display: flex; flex-direction: column; gap: 10px;">
+            <div class="review-user" style="display: flex; align-items: center; gap: 10px;">
+              <div class="user-avatar" style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color); display: grid; place-items: center; font-size: 1rem;">
+                ${rev.avatar || '👤'}
+              </div>
+              <div style="flex: 1;">
+                <h4 style="font-size: 0.85rem; color: var(--text-primary); margin: 0;">${rev.name}</h4>
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                  <span class="review-date" style="font-size: 0.68rem; color: var(--accent-cyan); font-weight: 700;">${rev.game}</span>
+                  <span style="font-size: 0.65rem; color: var(--text-muted);">${rev.date}</span>
+                </div>
+              </div>
+            </div>
+            <p class="review-text" style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4; font-style: italic; margin: 0; flex: none;">
+              "${rev.comment}"
+            </p>
+            <div class="stars" style="display: flex; gap: 2px;">${starsHtml}</div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    function submitReview() {
+      const nameInput = document.getElementById('review-username');
+      const commentInput = document.getElementById('review-comment');
+      const gameInput = document.getElementById('review-gamename');
+      
+      const name = nameInput.value.trim() || "ລູກຄ້າ Aoy Topup";
+      const comment = commentInput.value.trim();
+      const game = gameInput.value || "ເຕີມເກມ";
+      
+      if (!comment) {
+        alert("ກະລຸນາປ້ອນຂໍ້ຄວາມຣີວິວ!");
+        return;
+      }
+      
+      const avatarOptions = ["🏆", "🔥", "⚡", "👑", "⭐", "👾", "🎮", "🚀", "💎", "🎯"];
+      const randomAvatar = avatarOptions[Math.floor(Math.random() * avatarOptions.length)];
+      
+      const today = new Date();
+      const dateStr = today.toLocaleDateString('lo-LA', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      });
+      
+      const newReview = {
+        id: "rev-" + Date.now(),
+        name: name,
+        avatar: randomAvatar,
+        game: "ເຕີມ " + game,
+        comment: comment,
+        rating: selectedRating,
+        date: dateStr
+      };
+      
+      const reviews = getReviews();
+      reviews.push(newReview);
+      localStorage.setItem('aoy_topup_reviews', JSON.stringify(reviews));
+      
+      alert("ຂອບໃຈສຳລັບການຣີວິວ!");
+      closeReviewModal();
+      openAllReviewsModal();
+    }
+
+    window.addEventListener('click', (e) => {
+      const reviewModal = document.getElementById('review-modal');
+      const allReviewsModal = document.getElementById('all-reviews-modal');
+      if (e.target === reviewModal) {
+        closeReviewModal();
+      }
+      if (e.target === allReviewsModal) {
+        closeAllReviewsModal();
+      }
+    });
   </script>
 </body>
 </html>

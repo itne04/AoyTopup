@@ -308,6 +308,39 @@ document.addEventListener("DOMContentLoaded", () => {
       validateFormState();
     });
   }
+
+  // Render Homepage Reviews dynamically if the reviews grid container exists
+  const reviewsGrid = document.querySelector(".reviews-grid");
+  if (reviewsGrid) {
+    const reviews = getReviews();
+    reviewsGrid.innerHTML = ""; // Clear static cards
+    
+    // Sort reviews to show the latest first (reverse the order so newest is first)
+    const sortedReviews = [...reviews].reverse();
+    
+    sortedReviews.forEach(rev => {
+      const card = document.createElement("div");
+      card.className = "review-card";
+      
+      let starsHtml = "";
+      for (let i = 0; i < 5; i++) {
+        starsHtml += i < rev.rating ? "⭐" : "☆";
+      }
+
+      card.innerHTML = `
+        <div class="review-user">
+          <div class="user-avatar">${rev.avatar || '👤'}</div>
+          <div>
+            <h4>${rev.name}</h4>
+            <span class="review-date">${rev.game}</span>
+          </div>
+        </div>
+        <p class="review-text">"${rev.comment}"</p>
+        <div class="stars">${starsHtml}</div>
+      `;
+      reviewsGrid.appendChild(card);
+    });
+  }
 });
 
 // Selection logic
@@ -623,4 +656,47 @@ function renderKeysHistory() {
     `;
   });
   container.innerHTML = html;
+}
+
+// ==========================================================================
+// Customer Reviews Data & Helpers
+// ==========================================================================
+
+const defaultReviews = [
+  {
+    id: "rev-1",
+    name: "Mr Kira",
+    avatar: "🏆",
+    game: "ເຕີມ Free Fire",
+    comment: "ເຕີມເພັດ Free Fire ໄວຫຼາຍ! ໂອນເງິນປຸບ ໄດ້ເພັດປັດ. ລະບົບສະແກນ QR ຂອງ BCELOne ສະດວກແທ້ໆ.",
+    rating: 5,
+    date: "12/06/2026"
+  },
+  {
+    id: "rev-2",
+    name: "ນາງ ມະລິ",
+    avatar: "🔥",
+    game: "ເຕີມ RoV",
+    comment: "ລາຄາຖືກກວ່າຮ້ານອື່ນຫຼາຍ, ປອດໄພ ບໍ່ເຄີຍມີບັນຫາເລື່ອງໄອດີເລີຍ. ແນະນຳຮ້ານນີ້ຕະຫຼອດເລີຍ!",
+    rating: 5,
+    date: "11/06/2026"
+  },
+  {
+    id: "rev-3",
+    name: "Kaniki",
+    avatar: "⚡",
+    game: "ເຕີມ Roblox",
+    comment: "ເຄີຍມີບັນຫາປ້ອນ UID ຜິດ ແຕ່ຕິດຕໍ່ແອດມິນຜ່ານ WhatsApp ແລ້ວແກ້ໄຂໃຫ້ໄວຫຼາຍ ບໍລິການດີເດັ່ນ!",
+    rating: 5,
+    date: "10/06/2026"
+  }
+];
+
+function getReviews() {
+  const stored = localStorage.getItem('aoy_topup_reviews');
+  if (!stored) {
+    localStorage.setItem('aoy_topup_reviews', JSON.stringify(defaultReviews));
+    return defaultReviews;
+  }
+  return JSON.parse(stored);
 }
